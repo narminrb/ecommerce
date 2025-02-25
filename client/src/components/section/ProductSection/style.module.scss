@@ -1,0 +1,90 @@
+.productsection{
+    display: flex;
+    padding: 60px  0px;
+    align-items: flex-start;
+    gap: 24px;
+}
+
+.ul{
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    }
+.categories{
+    color:  #807E7E;
+    font-feature-settings: 'liga' off, 'clig' off;
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 22px; 
+}
+
+.catname{
+    color:  #121212;
+    font-feature-settings: 'liga' off, 'clig' off;
+    font-family: Inter;
+    font-size: 16px;
+    padding: 8px 0;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 26px; 
+}
+
+.filtdiv{
+     display: flex;
+    width: 262px;
+    margin-bottom: 10px;
+    align-items: center;
+    gap: 8px;
+}
+.filter{
+    color: #121212;
+    font-feature-settings: 'liga' off, 'clig' off;
+    font-family: Inter;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 32px; 
+}
+
+.prodheader{
+    display: flex;
+align-items: flex-start;
+gap: 419px;
+}
+
+.living{
+    color: #000;
+font-feature-settings: 'liga' off, 'clig' off;
+font-family: Inter;
+font-size: 20px;
+font-style: normal;
+font-weight: 600;
+line-height: 32px; 
+}
+
+.sort{
+    color:  #121212;
+font-feature-settings: 'liga' off, 'clig' off;
+font-family: Inter;
+font-size: 16px;
+font-style: normal;
+font-weight: 600;
+line-height: 26px; /* 162.5% */
+}
+
+.grids{
+    display: flex;
+    width: 46px;
+    height: 40px;
+    padding: 8px 11px;
+    justify-content: center;
+    align-items: center;
+}
+
+.leftgrids{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
