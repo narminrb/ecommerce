@@ -1,0 +1,84 @@
+.moduleimg{
+    display: flex;
+    width: 80px;
+    height: 96px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    img{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
+
+.tr{
+    display: flex;
+width: 376px;
+padding: 24px 0px;
+justify-content: space-between;
+align-items: center;
+border-bottom: 1px solid  #E8ECEF;
+}
+
+.modal{
+    display: flex;
+width: 413px;
+height: 1024px;
+padding: 40px 24px;
+flex-direction: column;
+justify-content: space-between;
+align-items: center;
+flex-shrink: 0;
+}
+
+.modalbtns{
+    display: flex;
+    width: 80px;
+    height: 32px;
+    padding: 12px 8px;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 4px;
+    border: 1px solid  #6C7275;
+}
+.quan{
+    color:  #121212;
+text-align: center;
+font-feature-settings: 'liga' off, 'clig' off;
+
+/* Text/12px/Semibold */
+font-family: Inter;
+font-size: 12px;
+font-style: normal;
+font-weight: 600;
+line-height: 20px; /* 166.667% */
+}
+
+.modaltotal{
+    color:  #141718;
+font-feature-settings: 'liga' off, 'clig' off;
+
+/* Headline 7 */
+font-family: Poppins;
+font-size: 20px;
+font-style: normal;
+font-weight: 500;
+line-height: 28px; /* 140% */
+}
+
+.totalprice{
+    color: #141718;
+text-align: right;
+font-feature-settings: 'liga' off, 'clig' off;
+
+/* Headline 7 */
+font-family: Poppins;
+font-size: 20px;
+font-style: normal;
+font-weight: 500;
+line-height: 28px; /* 140% */
+}

@@ -12,11 +12,15 @@ import fourthBtn from '../../../assets/fourthbtn.png'
 import { useCartContext } from '@/providers/CartContext'
 import { toast } from 'sonner'
 import SharedModal from '@/components/shared/SharedModal'
+import RangeSlider from 'react-range-slider-input';
+import 'react-range-slider-input/dist/style.css';
 
 
 
 
 const ProductSection = () => {
+  const [startValue, setStartValue] = React.useState(0);
+  const [endValue, setEndValue] = React.useState(1000);
     const [collection, setCollection] = useState('');
     const [gridCount, setGridCount] = useState(3);
 
@@ -25,8 +29,8 @@ const ProductSection = () => {
     const [openModal, setOpenModal] = useState(false);
     console.log(carts);
   const {data, isLoading, isError, error} = useQuery({
-    queryKey:[QueryKeys.products,collection],
-    queryFn: () => getApi(`/products?populate=*&filters[collections][name][$contains]=${collection}`)
+    queryKey:[QueryKeys.products,collection,startValue,endValue],
+    queryFn: () => getApi(`/products?populate=*&filters[collections][name][$contains]=${collection}&filters[number][$gte]=${startValue}&filters[number][$lte]=${endValue}`)
   })
 
 
@@ -71,6 +75,24 @@ const ProductSection = () => {
             }
            </ul>
            </div>
+           <div>
+            <h1 className={s.catname}>PRICE</h1>
+            <RangeSlider
+            min={0}
+            max={1000}
+            defaultValue={[0, 200]}
+            value={0}
+            onInput={(value) => {
+              setStartValue(value[0]);
+              setEndValue(value[1]);
+            }}
+             />
+             <div className='flex justify-between items-center my-3'>
+              <button>{startValue}</button>
+              <button>{endValue}</button>
+             </div>
+           </div>
+
            </div>
            <div className='col-span-9'>
                 <div className={s.prodheader}>

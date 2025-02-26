@@ -1,0 +1,59 @@
+.footbanname{
+    color:  #141718;
+text-align: center;
+font-feature-settings: 'liga' off, 'clig' off;
+
+/* Headline 4 */
+font-family: Poppins;
+font-size: 40px;
+font-style: normal;
+font-weight: 500;
+line-height: 44px; /* 110% */
+letter-spacing: -0.4px;
+}
+
+.footbandesc{
+    color: #141718;
+text-align: center;
+font-feature-settings: 'liga' off, 'clig' off;
+margin-top: 10px;
+font-family: Inter;
+font-size: 18px;
+font-style: normal;
+font-weight: 400;
+line-height: 30px; /* 166.667% */
+}
+
+.signup{
+    color:  #6C7275;
+font-feature-settings: 'liga' off, 'clig' off;
+
+/* Button S */
+font-family: Inter;
+font-size: 16px;
+font-style: normal;
+font-weight: 500;
+line-height: 28px; /* 175% */
+letter-spacing: -0.4px;
+}
+.inputdiv{
+display: flex;
+height: 52px;
+align-items: center;
+gap: 8px;
+flex-shrink: 0;
+align-self: stretch;
+border-bottom: 1px solid  rgba(108, 114, 117, 0.50);
+}
+.input{
+    color:  #6C7275;
+font-feature-settings: 'liga' off, 'clig' off;
+outline: none;
+width: 100%;
+font-family: Inter;
+font-size: 16px;
+font-style: normal;
+font-weight: 500;
+line-height: 28px; /* 175% */
+letter-spacing: -0.4px;
+}
