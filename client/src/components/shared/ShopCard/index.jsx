@@ -1,6 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import s from './style.module.scss'
-const ShopCard = ({starCount, Color,ProductName, DefaultImg, HoverImg,price,DiscountPrice, ...props}) => {
+import { Link } from 'react-router'
+const ShopCard = ({starCount, LinkId,openModal, Color,
+    addToCart,
+    ProductName, DefaultImg, HoverImg,price,DiscountPrice, ...props}) => {
+
 
     const CheckColorProduct = (color) => {
         switch(color){
@@ -30,7 +34,13 @@ const ShopCard = ({starCount, Color,ProductName, DefaultImg, HoverImg,price,Disc
             <img className='w-full h-full object-cover' src={`http://localhost:1337${DefaultImg}`} alt="" />
             <div className={s.product_action}>
                 <ul>
+                    <li 
+                    onClick={() => {
+                        addToCart(); 
+                        openModal();
+                      }}>
                     Add to cart
+                    </li>
                 </ul>
             </div>
 
@@ -50,8 +60,6 @@ const ShopCard = ({starCount, Color,ProductName, DefaultImg, HoverImg,price,Disc
 
             <p className={s.discountprice}>
                 ${DiscountPrice} <span className={s.price}>${price}</span>
-                {/* <span className={s.price}>{price}</span>
-                {DiscountPrice && <span className={s.discounted_price}>{DiscountPrice}</span>} */}
             </p>
             <div className='flex justify-center items-center gap-2'>
                {
@@ -65,6 +73,7 @@ const ShopCard = ({starCount, Color,ProductName, DefaultImg, HoverImg,price,Disc
                 ))
                }
             </div>
+            <Link to={`/shop/${LinkId}`} className='bg-black my-4 text-white p-2 rounded-md'>View Product</Link>
         </div>
 
     </div>

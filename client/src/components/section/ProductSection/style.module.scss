@@ -50,18 +50,18 @@
 
 .prodheader{
     display: flex;
-align-items: flex-start;
-gap: 419px;
+    align-items: flex-start;
+    gap: 419px;
 }
 
 .living{
     color: #000;
-font-feature-settings: 'liga' off, 'clig' off;
-font-family: Inter;
-font-size: 20px;
-font-style: normal;
-font-weight: 600;
-line-height: 32px; 
+    font-feature-settings: 'liga' off, 'clig' off;
+    font-family: Inter;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 32px; 
 }
 
 .sort{
@@ -78,13 +78,22 @@ line-height: 26px; /* 162.5% */
     display: flex;
     width: 46px;
     height: 40px;
-    padding: 8px 11px;
+    padding: 5px 8px;
     justify-content: center;
     align-items: center;
+    border-right: 1px solid  #E8ECEF;
+    background: #FFF;
 }
 
 .leftgrids{
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 32px;
+}
+
+.btns{
+    display: flex;
+    align-items: flex-start;
+    border: 1px solid  #EAEAEA;
+    background:  #FFF;
 }

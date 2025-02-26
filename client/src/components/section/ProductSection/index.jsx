@@ -2,14 +2,28 @@ import ShopCard from '@/components/shared/ShopCard'
 import { QueryKeys } from '@/constants/QueryKeys'
 import { getApi } from '@/http/api'
 import { useQuery } from '@tanstack/react-query'
-import React, { useState } from 'react'
+import React, {  useState } from 'react'
 import s from './style.module.scss'
 import firstBtn from '../../../assets/firstbtn.png'
 import secondBtn from '../../../assets/secondbtn.png'
 import thirdBtn from '../../../assets/thirdbtn.png'
+import button from '../../../assets/button.png'
+import fourthBtn from '../../../assets/fourthbtn.png'
+import { useCartContext } from '@/providers/CartContext'
+import { toast } from 'sonner'
+import SharedModal from '@/components/shared/SharedModal'
+
+
+
+
 const ProductSection = () => {
     const [collection, setCollection] = useState('');
+    const [gridCount, setGridCount] = useState(3);
 
+    const {carts, addToCart,removeFromCart, totalAmount} =useCartContext();
+
+    const [openModal, setOpenModal] = useState(false);
+    console.log(carts);
   const {data, isLoading, isError, error} = useQuery({
     queryKey:[QueryKeys.products,collection],
     queryFn: () => getApi(`/products?populate=*&filters[collections][name][$contains]=${collection}`)
@@ -20,7 +34,9 @@ const ProductSection = () => {
     queryKey:[QueryKeys.collections],
     queryFn: () => getApi("/collections?populate=*")
   })
-  console.log(collectionData);
+  //console.log(collectionData);
+
+
 
   return (
     <div className={s.productsection}>
@@ -50,7 +66,6 @@ const ProductSection = () => {
                     onClick={()=>setCollection(el.name)}
                     className={s.categories} key={index}>
                         {el.name}
-                    {/* <Link to={`/collection/${el._id}`}>{el.name}</Link> */}
                     </li>
                 ))
             }
@@ -61,22 +76,49 @@ const ProductSection = () => {
                 <div className={s.prodheader}>
                     <h2 className={s.living}>Living Room</h2>
                     <div className={s.leftgrids}>
-                        <p className={s.sort}>Sort by</p>
-                        <div className={s.grids}>
+                        <div>
+                          <img src={button} alt="" />
+                        </div>
+                        <div className={s.btns}>
+                        <div 
+                        onClick={()=>setGridCount(3)}
+                        className={s.grids}>
                         <img src={firstBtn} alt="" />
                         </div>
-                        <div className={s.grids}>
+                        <div 
+                        onClick={()=>setGridCount(2)}
+                        className={s.grids}>
                         <img src={secondBtn} alt="" />
                         </div>
-                        <div className={s.grids}>
+                        <div
+                        onClick={()=>setGridCount(2)}
+                         className={s.grids}>
                         <img src={thirdBtn} alt="" />
+                        </div>
+                        <div 
+                        onClick={()=>setGridCount(1)}
+                        className={s.grids}>
+                        <img src={fourthBtn} alt="" />
+                        </div>
                         </div>
                     </div>
                 </div>
-             <div className='grid grid-cols-3 gap-4'>
+                {
+                  openModal && <SharedModal 
+                  onClose={() => setOpenModal(false)}
+                  />
+                }
+             <div className={`grid grid-cols-${gridCount} gap-6`}>
            {
             data?.data && data?.data.map((el,index)=>(
               <ShopCard 
+              LinkId = {el.id}
+              openModal={()=>setOpenModal(true)}
+              addToCart={() => {
+                addToCart(el)
+                toast.success("Product added to cart successfully")
+              }
+              }
               DefaultImg={el.image.url}
               ProductName={el.name}
               price={el.number}
