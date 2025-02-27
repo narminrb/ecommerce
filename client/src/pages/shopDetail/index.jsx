@@ -1,3 +1,4 @@
+import FooterBanner from '@/components/section/FooterBanner'
 import SharedComments from '@/components/shared/SharedComments'
 import { QueryKeys } from '@/constants/QueryKeys'
 import { getApi, postApi } from '@/http/api'
@@ -6,7 +7,7 @@ import React, { useState } from 'react'
 import { useParams } from 'react-router'
 import ReactStars from 'react-stars'
 
-const ShopDetail = ({shopId}) => {
+const ShopDetail = ({shopId,starCount}) => {
     const { id } = useParams();
 
     const queryClient = useQueryClient();
@@ -48,62 +49,49 @@ const ShopDetail = ({shopId}) => {
     //   };
       
   return (
-    <div>
+   <>
+    <div className='mx-auto max-w-screen-xl'>
 <div className="min-h-full bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100">
     <div className="container mx-auto px-4 py-4">
     </div>
     <main className="container mx-auto px-4 py-8">
         <div className="grid md:grid-cols-2 gap-8">
             <div className="space-y-4">
+            {
+            data?.data && data?.data.map((el,index)=>(
+               <>
                 <div className="aspect-square bg-gray-100 dark:bg-gray-800 rounded-xl overflow-hidden">
-                    <img src="https://res.cloudinary.com/djv4xa6wu/image/upload/v1735722161/AbhirajK/Abhirajk3.webp" alt="Reebok Zig Kinetica 3" className="w-full h-full object-cover"/>
-                </div>
-                <div className="grid grid-cols-4 gap-4">
-                    <button className="aspect-square bg-gray-100 dark:bg-gray-800 rounded-lg overflow-hidden border-2 border-primary">
-                        <img src="https://res.cloudinary.com/djv4xa6wu/image/upload/v1735722161/AbhirajK/Abhirajk3.webp" alt="Thumbnail 1" className="w-full h-full object-cover"/>
-                    </button>
-                    <button className="aspect-square bg-gray-100 dark:bg-gray-800 rounded-lg overflow-hidden">
-                        <img src="https://res.cloudinary.com/djv4xa6wu/image/upload/v1735722161/AbhirajK/Abhirajk3.webp" alt="Thumbnail 2" className="w-full h-full object-cover"/>
-                    </button>
-                    <button className="aspect-square bg-gray-100 dark:bg-gray-800 rounded-lg overflow-hidden">
-                        <img src="https://res.cloudinary.com/djv4xa6wu/image/upload/v1735722161/AbhirajK/Abhirajk3.webp" alt="Thumbnail 3" className="w-full h-full object-cover"/>
-                    </button>
-                    <button className="aspect-square bg-gray-100 dark:bg-gray-800 rounded-lg overflow-hidden relative group">
-                        <img src="https://res.cloudinary.com/djv4xa6wu/image/upload/v1735722161/AbhirajK/Abhirajk3.webp" alt="Thumbnail 4" className="w-full h-full object-cover"/>
-                        <div className="absolute inset-0 bg-black/50 flex items-center justify-center text-white">+4</div>
-                    </button>
-                </div>
+                <img src={`http://localhost:1337${el.image.url}`} alt="Reebok Zig Kinetica 3" className="w-full h-full object-cover"/>
+            </div>
+               </>
+            ))
+           }
+            
             </div>
             <div className="space-y-6">
                 <div className="flex items-start justify-between">
                     <div>
-                        <div className="flex items-center gap-2 mb-2">
-                            <img src="https://res.cloudinary.com/djv4xa6wu/image/upload/v1735722161/AbhirajK/Abhirajk3.webp" alt="Reebok" className="w-6 h-6 rounded-full"/>
-                            <span className="font-medium">Zudio</span>
-                        </div>
-                        <h1 className="text-3xl font-bold mb-2">Shoes Zudio 1299</h1>
+                                {
+                        data?.data && data?.data.map((el,index)=>(
+                        <>
+                            <h1 className="text-3xl font-bold mb-2">{el.name}</h1>
+                        </>
+                        ))
+                    }
+                    
                         <div className="flex items-center gap-2">
-                            <div className="flex items-center">
-                                <svg className="w-5 h-5 text-yellow-400 fill-current" viewBox="0 0 20 20">
-                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-                                </svg>
-                                <svg className="w-5 h-5 text-yellow-400 fill-current" viewBox="0 0 20 20">
-                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-                                </svg>
-                                <svg className="w-5 h-5 text-yellow-400 fill-current" viewBox="0 0 20 20">
-                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-                                </svg>
-                                <svg className="w-5 h-5 text-yellow-400 fill-current" viewBox="0 0 20 20">
-                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-                                </svg>
-                                <svg className="w-5 h-5 text-gray-300 dark:text-gray-600 fill-current" viewBox="0 0 20 20">
-                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-                                </svg>
-                            </div>
+                        <ul className='flex items-center gap-1'>
+                    {
+                        new Array(starCount).fill(0).map((_, index) => (
+                            <li key={index}>
+                                <i className="ri-star-fill text-amber-300 text-2xl"></i>
+                            </li>
+                        ))
+                    }
+                </ul>
                             <span className="text-sm text-gray-500 dark:text-gray-400">(42 reviews)</span>
                         </div>
                     </div>
-                    <div className="text-3xl font-bold">₹1299.00</div>
                 </div>
                 <div>
                     <h3 className="font-medium mb-3">Color</h3>
@@ -222,6 +210,8 @@ const ShopDetail = ({shopId}) => {
     </main>
     </div>
     </div>
+    <FooterBanner/>
+   </>
   )
 }
 

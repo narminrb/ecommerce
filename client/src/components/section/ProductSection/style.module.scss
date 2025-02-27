@@ -19,6 +19,9 @@
     font-weight: 600;
     line-height: 22px; 
 }
+.stars{
+    color: red;
+}
 
 .catname{
     color:  #121212;
@@ -51,7 +54,8 @@
 .prodheader{
     display: flex;
     align-items: flex-start;
-    gap: 419px;
+    justify-content: space-between;
+    //gap: 419px;
 }
 
 .living{
@@ -71,7 +75,7 @@ font-family: Inter;
 font-size: 16px;
 font-style: normal;
 font-weight: 600;
-line-height: 26px; /* 162.5% */
+line-height: 26px; 
 }
 
 .grids{

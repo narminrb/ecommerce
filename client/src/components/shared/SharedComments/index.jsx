@@ -36,7 +36,6 @@ const SharedComments = ({PersonName, Time,Comment,starCount}) => {
       <div className="space-y-4">
         <div className="bg-white p-4 rounded-lg shadow">
           <div className="flex items-center mb-2">
-            <img src="https://via.placeholder.com/40" alt="User Avatar" className="w-10 h-10 rounded-full mr-3" />
             <div>
               <h3 className="font-semibold">{PersonName}</h3>
               <p className="text-sm text-gray-500">Posted on {dayjs(Time).format(`MM-DD-YYYY`)}</p>
