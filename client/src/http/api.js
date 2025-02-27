@@ -13,3 +13,12 @@ export const getApi=async(url)=>{
         console.error(error);
     }
 }
+
+export const postApi = async (url, payload) => {
+    try {
+      const response = await AxiosInstance.post(url, payload);
+      return response.data;
+    } catch (error) {
+      console.error(error);
+    }
+  };

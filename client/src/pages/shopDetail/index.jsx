@@ -1,19 +1,55 @@
+import SharedComments from '@/components/shared/SharedComments'
 import { QueryKeys } from '@/constants/QueryKeys'
-import { getApi } from '@/http/api'
-import { useQuery } from '@tanstack/react-query'
-import React from 'react'
+import { getApi, postApi } from '@/http/api'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import React, { useState } from 'react'
 import { useParams } from 'react-router'
+import ReactStars from 'react-stars'
 
 const ShopDetail = ({shopId}) => {
     const { id } = useParams();
-    const {data:detailData, isLoading: detailLoading, isError: detailError, error: detailErr} = useQuery({
+
+    const queryClient = useQueryClient();
+  const [form, setForm] =useState({
+    name: '',
+    desc: '',
+    stars:0,
+    product:id
+  })
+
+  const {mutate, isPending} = useMutation({
+    mutationKey:["AddComment"],
+    mutationFn: () => postApi('/comments', {data:
+      {...form}}
+      
+    ),
+    onSuccess: () => {
+        queryClient.invalidateQueries(QueryKeys.shopDetail,id)
+        setForm({
+            name: '',
+            desc: '',
+            stars: 0,
+            product: id
+        })
+    }
+  })
+  const handleChange=(e) =>{
+    setForm({...form, 
+      [e.target.name]: e.target.value})
+  }
+    const {data, isLoading, isError, error} = useQuery({
         queryKey: [QueryKeys.shopDetail, id],
         queryFn: () => getApi(`/products?populate=*&filters[id]=${id}`)
   
     })
+
+    // const handleStarChange = (newRating) => {
+    //     setForm((prevForm) => ({ ...prevForm, stars: newRating }));
+    //   };
+      
   return (
     <div>
-<body className="min-h-full bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100">
+<div className="min-h-full bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100">
     <div className="container mx-auto px-4 py-4">
     </div>
     <main className="container mx-auto px-4 py-8">
@@ -131,101 +167,60 @@ const ShopDetail = ({shopId}) => {
                 </div>
             </div>
 
-            <div className="mt-8 grid md:grid-cols-2 gap-8">
-                <div className="space-y-6">
-                    <div className="flex items-start gap-4">
-                        <img src="https://res.cloudinary.com/djv4xa6wu/image/upload/v1734628863/portfolio/mvsefulf9mimzumpbo0o.jpg" alt="Reviewer" className="w-10 h-10 rounded-full"/>
-                        <div className="flex-1">
-                            <div className="flex items-center justify-between mb-1">
-                                <h4 className="font-medium">ARK customer</h4>
-                                <span className="text-sm text-gray-500 dark:text-gray-400">Yesterday</span>
-                            </div>
-                            <div className="flex items-center mb-2">
-                                <svg className="w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 20 20">
-                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-                                </svg>
-                                <svg className="w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 20 20">
-                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-                                </svg>
-                                <svg className="w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 20 20">
-                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-                                </svg>
-                                <svg className="w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 20 20">
-                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-                                </svg>
-                            </div>
-                            <p className="text-gray-600 dark:text-gray-300">Excellent running shoes. It turns very sharply on the foot. good to buy from Zudioo.</p>
-                            <div className="flex items-center gap-4 mt-4">
-                                <button className="flex items-center gap-1 text-sm text-gray-500 dark:text-gray-400">
-                                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"/>
-                                    </svg>
-                                    42
-                                </button>
-                                <button className="flex items-center gap-1 text-sm text-gray-500 dark:text-gray-400">
-                                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 14H5.236a2 2 0 01-1.789-2.894l3.5-7A2 2 0 018.736 3h4.018c.163 0 .326.02.485.06L17 4m-7 10v2a2 2 0 002 2h.095c.5 0 .905-.405.905-.905 0-.714.211-1.412.608-2.006L17 11v-9m-7 10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"/>
-                                    </svg>
-                                    0
-                                </button>
-                            </div>
+            {
+                                data?.data[0]?.comments?.map((el, index) => (
+                                    <SharedComments key={index}
+                                        PersonName={el?.name}
+                                        Time={el?.created_at}
+                                        starCount={el?.stars}
+                                        Title={el?.desc} />
+                                ))
+                            }
+            </div>
+            <div>
+                 <form 
+                      onSubmit={(e) => {
+                        e.preventDefault()
+                        mutate()
+                       
+                      }}
+                      className="mt-8 bg-white p-4 rounded-lg shadow">
+                        <h3 className="text-lg font-semibold mb-2">Add a Comment</h3>
+                        <div className="mb-4">
+                          <label htmlFor="name" className="block text-gray-700 font-medium mb-2">Name</label>
+                          <input
+                           onChange={handleChange}
+                           value={form.name}
+                           type="text" id="name" name="name" className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required />
                         </div>
-                    </div>
-                </div>
-                <div className="space-y-6">
-                <div className="flex items-center gap-4">
-                    <div className="text-5xl font-bold text-primary">4.8</div>
-                    <div className="flex-1">
-                    <div className="flex items-center gap-2 mb-1">
-                        <div className="flex-1 h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
-                        <div className="h-full bg-primary" style={{ width: "90%" }}></div>
+                        <div className="mb-4">
+                          <label htmlFor="comment" className="block text-gray-700 font-medium mb-2">Comment</label>
+                          <textarea 
+                           onChange={handleChange}
+                           value={form.desc}
+                          id="desc" name="desc" rows="4" className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required></textarea>
                         </div>
-                        <span className="text-sm text-gray-500 dark:text-gray-400">28</span>
-                    </div>
-                    <div className="flex items-center gap-2 mb-1">
-                        <div className="flex-1 h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
-                        <div className="h-full bg-primary" style={{ width: "70%" }}></div>
+                        <div className='my-4'>
+                        <ReactStars
+                             count={5}
+                            value={form.stars}
+                            onChange={ (e) => { setForm({
+                                                    ...form,
+                                                    stars: e
+                                                })
+                                            }
+                                        }
+                            size={24}
+                            color2={'#ffd700'} />
                         </div>
-                        <span className="text-sm text-gray-500 dark:text-gray-400">9</span>
-                    </div>
-                    <div className="flex items-center gap-2 mb-1">
-                        <div className="flex-1 h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
-                        <div className="h-full bg-primary" style={{ width: "40%" }}></div>
-                        </div>
-                        <span className="text-sm text-gray-500 dark:text-gray-400">4</span>
-                    </div>
-                    <div className="flex items-center gap-2 mb-1">
-                        <div className="flex-1 h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
-                        <div className="h-full bg-primary" style={{ width: "20%" }}></div>
-                        </div>
-                        <span className="text-sm text-gray-500 dark:text-gray-400">1</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                        <div className="flex-1 h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
-                        <div className="h-full bg-primary" style={{ width: "10%" }}></div>
-                        </div>
-                        <span className="text-sm text-gray-500 dark:text-gray-400">1</span>
-                    </div>
-                    </div>
-                </div>
-                </div>
-                </div>
+                        <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+                          {isPending ? 'Loading...' : 'Add Comment...'}
+                        </button>
+                      </form>
             </div>
 
     </main>
-
-    <aside className="container mx-auto px-4 py-8">
-        <div className="bg-gray-100 dark:bg-gray-800 rounded-xl p-6">
-            <h2 className="text-2xl font-bold mb-2">Popular brands with discounts over 25%</h2>
-            <p className="text-gray-600 dark:text-gray-300">Check out our featured brands with amazing discounts</p>
-        </div>
-    </aside>
-    <div className="fixed bottom-4 right-4 text-sm text-gray-500 dark:text-gray-400">
-        <a href="https://abhirajk.vercel.app" target="_blank" rel="noopener noreferrer" className="hover:text-primary">
-            Created by Abhiraj K
-        </a>
     </div>
-    </body>
     </div>
   )
 }

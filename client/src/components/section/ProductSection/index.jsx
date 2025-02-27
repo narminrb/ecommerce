@@ -130,7 +130,8 @@ const ProductSection = () => {
                   onClose={() => setOpenModal(false)}
                   />
                 }
-             <div className={`grid grid-cols-${gridCount} gap-6`}>
+            <div className={`grid gap-6 ${gridCount === 1 ? 'grid-cols-1' : gridCount === 2 ? 'grid-cols-2' : 'grid-cols-3'}`}>
+
            {
             data?.data && data?.data.map((el,index)=>(
               <ShopCard 
